@@ -4,7 +4,7 @@
 use std::{fmt, path::PathBuf, str::FromStr};
 
 use anyhow::bail;
-use clap::{Args, Parser, Subcommand, ValueEnum};
+use clap::{Args, Parser, Subcommand, ValueEnum, builder::Styles};
 use tracing::Level;
 
 use crate::Selector;
@@ -137,8 +137,33 @@ pub struct NetworkGroup {
     pub ignore_tls_validation: bool,
 }
 
+fn list_additional_help() -> String {
+    let styles = Styles::styled();
+    let h = styles.get_header();
+    let l = styles.get_literal();
+    let p = styles.get_placeholder();
+
+    format!(
+        "{h}Help:{h:#}
+
+  To list the available firmware versions, run:
+
+    {l}nudl{l:#} {l}list{l:#} {l}-b{l:#} {p}<brand>{p:#}
+
+  The first column contains the model ID. To download the firmware, run:
+
+    {l}nudl{l:#} {l}download{l:#} {l}-b{l:#} {p}<brand>{p:#} {l}-m{l:#} {p}<model>{p:#}
+
+  For more information about download-related options, run:
+
+    {l}nudl{l:#} {l}download{l:#} {l}--help{l:#}
+"
+    )
+}
+
 /// List available firmware.
 #[derive(Debug, Parser)]
+#[command(after_help = list_additional_help())]
 pub struct ListCli {
     #[command(flatten)]
     pub family: FamilyGroup,
@@ -158,8 +183,31 @@ pub struct ListCli {
     pub network: NetworkGroup,
 }
 
+fn download_additional_help() -> String {
+    let styles = Styles::styled();
+    let h = styles.get_header();
+    let l = styles.get_literal();
+    let p = styles.get_placeholder();
+
+    format!("{h}Help:{h:#}
+
+  Specify {l}-m{l:#}/{l}--model{l:#} to select the vehicle model. For example:
+
+    {l}nudl{l:#} {l}download{l:#} {l}-b{l:#} {p}<brand>{p:#} {l}-m{l:#} {p}<model>{p:#} {l}-o{l:#} {p}<output directory>{p:#}
+
+  If there are multiple firmware variants for a single model (eg. HEV vs. PHEV),
+  the command will fail and print out the list of available downloads as well as
+  the additional command line options needed to select a specific one.
+
+  To list the available models, run:
+
+    {l}nudl{l:#} {l}list{l:#} {l}-b{l:#} {p}<brand>{p:#}
+")
+}
+
 /// Download firmware.
 #[derive(Debug, Parser)]
+#[command(after_help = download_additional_help())]
 pub struct DownloadCli {
     #[command(flatten)]
     pub family: FamilyGroup,
@@ -189,8 +237,27 @@ pub struct DownloadCli {
     pub network: NetworkGroup,
 }
 
+fn verify_additional_help() -> String {
+    let styles = Styles::styled();
+    let h = styles.get_header();
+
+    format!(
+        "{h}Help:{h:#}
+
+  This subcommand is normally not needed because checksums are automatically
+  verified during the download process. However, it can be useful for verifying
+  checksums after the files have been copied elsewhere, for example to a USB
+  drive.
+
+  The vehicle itself will also verify checksums and digital signatures, so there
+  is minimal risk of corrupted files causing issues.
+"
+    )
+}
+
 /// Verify CRC32 of existing firmware.
 #[derive(Debug, Parser)]
+#[command(after_help = verify_additional_help())]
 pub struct VerifyCli {
     /// Firmware directory.
     #[arg(short, long, value_parser, default_value = ".")]
@@ -210,8 +277,24 @@ pub enum Command {
     Verify(VerifyCli),
 }
 
+fn cli_additional_help() -> String {
+    let styles = Styles::styled();
+    let h = styles.get_header();
+    let l = styles.get_literal();
+    let p = styles.get_placeholder();
+
+    format!(
+        "{h}Help:{h:#}
+
+  For additional information about a subcommand, run:
+
+    {l}nudl{l:#} {p}<COMMAND>{p:#} {l}--help{l:#}
+"
+    )
+}
+
 #[derive(Debug, Parser)]
-#[command(version)]
+#[command(version, after_help = cli_additional_help())]
 pub struct Cli {
     #[command(subcommand)]
     pub command: Command,
