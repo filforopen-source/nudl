@@ -7,6 +7,10 @@
     to update the actual links at the bottom of the file.
 -->
 
+### Unreleased
+
+* Add additional usage information to the footer of `--help` output ([PR #67])
+
 ### Version 1.1.0
 
 * Add support for OSC 9;4 ([PR #64])
@@ -175,3 +179,4 @@
 [PR #64]: https://github.com/chenxiaolong/nudl/pull/64
 [PR #65]: https://github.com/chenxiaolong/nudl/pull/65
 [PR #66]: https://github.com/chenxiaolong/nudl/pull/66
+[PR #67]: https://github.com/chenxiaolong/nudl/pull/67
