@@ -10,6 +10,8 @@
 ### Unreleased
 
 * Add additional usage information to the footer of `--help` output ([PR #67])
+* Compute the total output size instead of trusting the server-provided size ([Issue #68], [PR #69])
+  * Fixes the post-processing progress bar showing an incorrect total size, like `<size>/0 B`.
 * Update dependencies ([PR #70])
 
 ### Version 1.1.0
@@ -142,6 +144,7 @@
 [Issue #41]: https://github.com/chenxiaolong/nudl/issues/41
 [Issue #45]: https://github.com/chenxiaolong/nudl/issues/45
 [Issue #50]: https://github.com/chenxiaolong/nudl/issues/50
+[Issue #68]: https://github.com/chenxiaolong/nudl/issues/68
 [PR #1]: https://github.com/chenxiaolong/nudl/pull/1
 [PR #2]: https://github.com/chenxiaolong/nudl/pull/2
 [PR #3]: https://github.com/chenxiaolong/nudl/pull/3
@@ -181,4 +184,5 @@
 [PR #65]: https://github.com/chenxiaolong/nudl/pull/65
 [PR #66]: https://github.com/chenxiaolong/nudl/pull/66
 [PR #67]: https://github.com/chenxiaolong/nudl/pull/67
+[PR #69]: https://github.com/chenxiaolong/nudl/pull/69
 [PR #70]: https://github.com/chenxiaolong/nudl/pull/70
