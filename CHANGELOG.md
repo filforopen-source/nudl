@@ -7,7 +7,7 @@
     to update the actual links at the bottom of the file.
 -->
 
-### Unreleased
+### Version 1.2.0
 
 * Add additional usage information to the footer of `--help` output ([PR #67])
 * Compute the total output size instead of trusting the server-provided size ([Issue #68], [PR #69])
