@@ -54,7 +54,7 @@ To download firmware for a specific region, pass in `-r <region>`. The default r
 
 Firmware files are downloaded with 4 parallel connections by default. This can be changed with the `-c`/`--concurrency` argument. To interrupt a download, simply use Ctrl-C as usual. Rerunning the same command will resume the download.
 
-Note that the progress bars may sometimes be misleading (eg. `32.73 GiB / 10.60 GiB`). This is not a bug in the tool. The server is returning incorrect file sizes. However, nudl validates all checksums. If it doesn't fail with an error, then rest assured that all of the downloaded files are valid.
+nudl validates all checksums during the download. If the command doesn't fail with an error, then all of the downloaded files are valid.
 
 For more information about other command-line arguments, see `--help`.
 

@@ -352,17 +352,7 @@ async fn download_subcommand(cli: &DownloadCli, bars: MultiProgress) -> Result<(
                         }
                     }
 
-                    let osc94_bars: &[&ProgressBar] = if p_pp.length() == Some(0) {
-                        // If the server won't tell us the total extracted size,
-                        // then don't include post-processing progress since
-                        // otherwise the OSC 9;4 progress will always be more
-                        // than halfway complete.
-                        &[&p_dl]
-                    } else {
-                        &[&p_dl, &p_pp]
-                    };
-
-                    osc94.update(Osc94::Determinate(progress_percentage(osc94_bars)));
+                    osc94.update(Osc94::Determinate(progress_percentage(&[&p_dl, &p_pp])));
                 }
             }
         }

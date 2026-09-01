@@ -764,7 +764,9 @@ impl Downloader {
 
         // Report initial progress.
         let dl_total = self.firmware.files.iter().map(|f| f.download_size()).sum();
-        let pp_total = self.firmware.size;
+        // The server-provided FirmwareInfo::size is frequently 0, so compute it
+        // from the individual files instead.
+        let pp_total = self.firmware.files.iter().map(|f| f.size).sum();
 
         self.progress_tx
             .send(ProgressMessage::TotalDownload(dl_total))
