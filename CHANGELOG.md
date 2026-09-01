@@ -10,6 +10,7 @@
 ### Unreleased
 
 * Add additional usage information to the footer of `--help` output ([PR #67])
+* Update dependencies ([PR #70])
 
 ### Version 1.1.0
 
@@ -180,3 +181,4 @@
 [PR #65]: https://github.com/chenxiaolong/nudl/pull/65
 [PR #66]: https://github.com/chenxiaolong/nudl/pull/66
 [PR #67]: https://github.com/chenxiaolong/nudl/pull/67
+[PR #70]: https://github.com/chenxiaolong/nudl/pull/70
