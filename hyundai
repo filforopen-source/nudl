@@ -13,16 +13,17 @@ Features:
 
 First, download nudl from the [releases page](https://github.com/chenxiaolong/nudl/releases) or [build it from source](#building-from-source).
 
-Then, to list the available vehicle models and firmware versions, run:
+Then, to list the available vehicle models and firmware versions, run: nudl download -b <brand> -m <model> -v <firmware version>
+```
 
 ```bash
 nudl list -b <brand>
 ```
 
-where `<brand>` is `hyundai`, `kia`, or `genesis`.
+where `<brand>` is `hyundai`, `kn`, or `genesis`.
 
 
-To download the latest firmware for a vehicle, run:
+To download the latest firmware for a vehicle, run: update
 
 ```bash
 nudl download -b <brand> -m <model> -o <output directory>
